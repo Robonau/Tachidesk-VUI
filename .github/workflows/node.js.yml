@@ -72,5 +72,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+          tags: ${{ github.repository_owner }}/tachidesk-vui:latest
 # i would also like to do pages, but idk where to even start with that
