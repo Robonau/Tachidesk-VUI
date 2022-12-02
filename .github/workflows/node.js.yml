@@ -67,10 +67,15 @@ jobs:
       #   uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       #   with:
       #     images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: downcase REPO
+        id: downcase
+        run: |
+          echo "user=${github.repository_owner,,}" >> $GITHUB_OUTPUT
+          echo "name=${github.event.repository.name,,}" >> $GITHUB_OUTPUT
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: ${{ github.repository_owner,, }}/${{ github.event.repository.name,, }}:latest
+          tags: ${{ steps.downcase.outputs.user }}/${{ steps.downcase.outputs.name }}:latest
 # i would also like to do pages, but idk where to even start with that
